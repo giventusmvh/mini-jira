@@ -8,6 +8,7 @@ import com.gvn.mini_jira.dto.response.LoginResponse;
 import com.gvn.mini_jira.entity.User;
 import com.gvn.mini_jira.exception.BadRequestException;
 import com.gvn.mini_jira.repository.UserRepository;
+import com.gvn.mini_jira.security.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +18,7 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     public LoginResponse login(LoginRequest request) {
 
@@ -27,8 +29,10 @@ public class AuthService {
             throw new BadRequestException("Invalid email or password");
         }
 
+        String token = jwtUtil.generateToken(user.getEmail());
+
         return LoginResponse.builder()
-                .token("dummy-token")
+                .token(token)
                 .build();
 
     }
