@@ -2,6 +2,7 @@ package com.gvn.mini_jira.service;
 
 import java.time.LocalDateTime;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gvn.mini_jira.dto.request.UserRequest;
@@ -17,12 +18,13 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public User createDummyUser() {
         User user = User.builder()
                 .name("Wei Sheng")
                 .email("wei.sheng@tutorle.com")
-                .password("password")
+                .password(passwordEncoder.encode("password"))
                 .active(true)
                 .createdAt(LocalDateTime.now())
                 .build();
@@ -38,7 +40,7 @@ public class UserService {
         User user = User.builder()
                 .name(request.getName())
                 .email(request.getEmail())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .active(true)
                 .createdAt(LocalDateTime.now())
                 .build();
