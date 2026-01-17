@@ -51,7 +51,7 @@ public class CategoryService {
         return categoryMapper.toResponseList(categories);
     }
 
-    public CategoryResponse getCategoryByid(Long id) {
+    public CategoryResponse getCategoryById(Long id) {
         User owner = getCurrentUser();
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Category not found"));
