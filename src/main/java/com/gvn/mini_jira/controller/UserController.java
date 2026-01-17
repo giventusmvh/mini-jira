@@ -1,5 +1,7 @@
 package com.gvn.mini_jira.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +43,15 @@ public class UserController {
                 .data(userService.createUser(request))
                 .build();
 
+    }
+
+    @GetMapping
+    public ApiResponse<List<UserResponse>> getAllUsers() {
+        return ApiResponse.<List<UserResponse>>builder()
+                .success(true)
+                .message("Users retrieved successfully")
+                .data(userService.getAllUsers())
+                .build();
     }
 
 }
