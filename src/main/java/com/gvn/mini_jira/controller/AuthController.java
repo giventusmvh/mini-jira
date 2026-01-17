@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gvn.mini_jira.dto.request.LoginRequest;
+import com.gvn.mini_jira.dto.request.UserRequest;
 import com.gvn.mini_jira.dto.response.LoginResponse;
+import com.gvn.mini_jira.dto.response.UserResponse;
 import com.gvn.mini_jira.service.AuthService;
 import com.gvn.mini_jira.util.ApiResponse;
 
@@ -21,11 +23,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public ApiResponse<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
-        return ApiResponse.<LoginResponse>builder()
-                .success(true)
-                .message("Login successfully")
-                .data(authService.login(request))
-                .build();
+        return ApiResponse.success(authService.login(request), "Login successfully");
+    }
+
+    @PostMapping("/register")
+    public ApiResponse<UserResponse> register(@RequestBody @Valid UserRequest request) {
+        return ApiResponse.success(authService.register(request), "User registered successfully");
     }
 
 }
