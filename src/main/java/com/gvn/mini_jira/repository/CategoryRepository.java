@@ -9,5 +9,5 @@ import com.gvn.mini_jira.entity.User;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     List<Category> findByOwner(User owner);
 
-    List<Category> findByOwnerByCreatedAtDesc(User owner);
+    List<Category> findByOwnerOrderByCreatedAtDesc(User owner);
 }

@@ -1,13 +1,13 @@
 package com.gvn.mini_jira.repository;
 
 import java.util.List;
-import java.util.Locale.Category;
 
-import org.apache.tomcat.util.http.parser.Priority;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.gvn.mini_jira.entity.Category;
 import com.gvn.mini_jira.entity.Task;
 import com.gvn.mini_jira.entity.User;
+import com.gvn.mini_jira.enums.Priority;
 import com.gvn.mini_jira.enums.TaskStatus;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
